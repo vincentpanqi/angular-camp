@@ -1,0 +1,10 @@
+*.iml
+*.ipr
+*.iws
+*.log
+*.pyc
+*.class
+.idea/
+.svn/
+target/
+node_modules/

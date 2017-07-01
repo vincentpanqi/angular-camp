@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Echarts demo</title>
+    <!-- 引入 ECharts 文件 -->
+    <script type="text/javascript" src="../../js/jquery-1.12.4.min.js"></script>
+    <script src="./echarts.min.js"></script>
+    <script>
+        $(function () {
+            // 开始初始化echart数据
+            x_data = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"];
+            y_data = [[5, 20, 36, 10, 10, 20],
+                [6, 22, 13, 33, 12, 15]];
+            // 基于准备好的dom，初始化echarts实例
+            var myChart1 = echarts.init(document.getElementById('main1'));
+            var option1 = {
+                title: {
+                    text: '服装销量表'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['第一季度', '第二季度']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {},
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: x_data
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '第一季度',
+                        type: 'line',
+                        stack: '总量',
+                        data: y_data[0]
+                    },
+                    {
+                        name: '第二季度',
+                        type: 'line',
+                        stack: '总量',
+                        data: y_data[1]
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart1.setOption(option1);
+            //集群CPU使用详情
+            var nodeCpuChart = echarts.init(document.getElementById('nodeCpu'));
+            var fNodeCpu = function (times, values) {
+                var nodeCpuOption = {
+                    title: {
+                        text: 'CPU使用率'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        backgroundColor: 'rgba(138,159,179,0.7)',
+                        axisPointer: {
+                            type: 'cross',
+                            label: {
+                                backgroundColor: '#6a7985'
+                            }
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    legend: {
+                        data: ['cpu'],
+                        x: 'right',
+                        y: 'top',
+                        textStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    calculable: false,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: true,
+                            axisLine: {
+                                lineStyle: { //x轴线样式
+                                    color: '#728092',
+                                    width: 1
+                                }
+                            },
+                            axisTick: { //x坐标轴小标记
+                                show: true,
+                                onGap: false,
+                                lineStyle: {
+                                    color: '#728092',
+                                    width: 1
+                                }
+                            },
+                            axisLabel: { //坐标轴文本标签选项
+                                textStyle: {
+                                    color: '#728092'
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            data: (function () {
+                                return times;
+                            })()
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            name: '%',
+                            type: 'value',
+                            splitNumber: 4,
+                            axisLine: {
+                                show: true,
+                                lineStyle: { //y轴线样式
+                                    color: '#728092',
+                                    width: 1
+                                }
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#728092'
+                                }
+                            },
+                            splitLine: {
+                                lineStyle: {
+                                    color: '#e2e2e2'
+                                }
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'cpu',
+                            type: 'line',
+                            smooth: true,
+                            data: values,
+                            symbol: 'none',
+                            itemStyle: {
+                                normal: {
+                                    color: '#458ed3',
+                                    lineStyle: {
+                                        type: 'solid',
+                                        width: 0.9
+                                    },
+                                    areaStyle: {color: '#d2e1f0', type: 'default'}
+                                }
+                            }
+                        }
+                    ]
+                };
+                nodeCpuChart.setOption(nodeCpuOption);
+            };
+            var times = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+            var values = [20, 30, 12, 33, 23, 12, 4];
+            fNodeCpu(times, values);
+        });
+
+    </script>
+</head>
+<body>
+<!-- 销量折线图-->
+<div id="main1" style="width: 400px;height:200px;"></div>
+
+<!-- CPU使用率-->
+<div id="nodeCpu" style="width: 400px;height:200px;"></div>
+<hr/>
+
+</body>
+</html>
