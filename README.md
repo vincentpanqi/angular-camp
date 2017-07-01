@@ -8,7 +8,7 @@ ng-book2 代码演示
 
 ## 分支介绍
 
-* master - 一个最简单的基础分支，什么都没有，项目开始点
+* ng02-reddit - 仿照reddit.com的一个发表文章的文章
 
 ## License
 
