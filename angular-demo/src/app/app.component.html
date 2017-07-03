@@ -7,15 +7,30 @@
 </div>
 <h2>Here are some links to help you start: </h2>
 <hr>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
-  </li>
-</ul>
 
+
+<div class="container" [ngSwitch]="myVar">
+  <div *ngSwitchCase="'A'">Var is A</div>
+  <div *ngSwitchCase="'B'">Var is B</div>
+  <div *ngSwitchCDefault>Var is something else</div>
+</div>
+
+<div [style.backgroud-color]="'yellow'">aaaaa</div>
+<!-- 下面的backgroud-color使用单引号的原因是对象的键名中不能有连字符-->
+<div [ngStyle]="{color: 'white', 'backgroud-color': 'blue'}">bbbbb</div>
+
+<div>
+  <span [ngStyle]="{color: 'read'}" [style.font-size.px]="fontSize">text</span>
+</div>
+
+<div [ngClass]="{bordered: false, 'bordered-box': false}">this is never bordered</div>
+<div [ngClass]="['blue','round']">this is never bordered</div>
+
+<div class="ui list" *ngFor="let c of cities; let num = index">
+  <div class="item">{{ c }}, index = {{ num }}</div>
+</div>
+
+<!-- 字面量不解析变量-->
+<span class="pre" ngNonBindable>
+  this is what {{ content }} show
+</span>
