@@ -1,0 +1,12 @@
+<div>
+  <p
+    *ngIf="userName"
+    class="welcome">
+    Welcome: {{ userName }}!
+  </p>
+  <button
+    (click)="buyButtonPressed('HaHa')"
+    class="ui button"
+  >factory Sign In
+  </button>
+</div>

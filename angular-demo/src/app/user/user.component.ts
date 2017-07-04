@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 // imported here
 import { UserService } from '../services/user.service';
 
@@ -9,7 +9,8 @@ import { UserService } from '../services/user.service';
 })
 export class UserComponent implements OnInit {
   userName: string;
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              @Inject('API_URL') private apiUrl: string) {
     // empty because we don't have to do anything else!
   }
 
@@ -23,7 +24,7 @@ export class UserComponent implements OnInit {
 
     this.userName = this.userService.getUser().name;
 
-    console.log('User name is: ', this.userName);
+    console.log(`User name is: ${this.userName}, API_URL=${this.apiUrl}`);
   }
 
 }
